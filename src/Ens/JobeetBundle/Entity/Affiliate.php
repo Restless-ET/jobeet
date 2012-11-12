@@ -46,11 +46,11 @@ class Affiliate
     {
         $this->category_affiliates = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,14 +66,14 @@ class Affiliate
     public function setUrl($url)
     {
         $this->url = $url;
-    
+
         return $this;
     }
 
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -89,14 +89,14 @@ class Affiliate
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -112,14 +112,14 @@ class Affiliate
     public function setToken($token)
     {
         $this->token = $token;
-    
+
         return $this;
     }
 
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
     public function getToken()
     {
@@ -135,14 +135,14 @@ class Affiliate
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -158,7 +158,7 @@ class Affiliate
     public function addCategoryAffiliate(\Ens\JobeetBundle\Entity\CategoryAffiliate $categoryAffiliates)
     {
         $this->category_affiliates[] = $categoryAffiliates;
-    
+
         return $this;
     }
 
@@ -175,7 +175,7 @@ class Affiliate
     /**
      * Get category_affiliates
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCategoryAffiliates()
     {
@@ -187,5 +187,9 @@ class Affiliate
     public function setCreatedAtValue()
     {
         // Add your code here
+        if(!$this->getCreatedAt())
+        {
+            $this->created_at = new \DateTime();
+        }
     }
 }
