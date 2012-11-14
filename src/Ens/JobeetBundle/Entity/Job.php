@@ -3,6 +3,7 @@
 namespace Ens\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ens\JobeetBundle\Utils\Jobeet as Jobeet;
 
 /**
  * Ens\JobeetBundle\Entity\Job
@@ -491,5 +492,20 @@ class Job
     {
         // Add your code here
         $this->updated_at = new \DateTime();
+    }
+
+    public function getCompanySlug()
+    {
+      return Jobeet::slugify($this->getCompany());
+    }
+
+    public function getPositionSlug()
+    {
+      return Jobeet::slugify($this->getPosition());
+    }
+
+    public function getLocationSlug()
+    {
+      return Jobeet::slugify($this->getLocation());
     }
 }
