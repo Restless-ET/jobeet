@@ -22,10 +22,24 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('EnsJobeetBundle:Job')->findAll();
+        //$entities = $em->getRepository('EnsJobeetBundle:Job')->findAll();
+
+        /*$query = $em->createQuery(
+            'SELECT j FROM EnsJobeetBundle:Job j WHERE j.expires_at > :date'
+        )->setParameter('date', date('Y-m-d H:i:s', time()));
+        $entities = $query->getResult();*/
+
+        $entities = $em->getRepository('EnsJobeetBundle:Job')->getActiveJobs();
+
+        $categories = $em->getRepository('EnsJobeetBundle:Category')->getWithJobs();
+
+        foreach($categories as $category)
+        {
+          $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId(), $this->container->getParameter('max_jobs_on_homepage')));
+        }
 
         return $this->render('EnsJobeetBundle:Job:index.html.twig', array(
-            'entities' => $entities,
+            'categories' => $categories, //'entities' => $entities,
         ));
     }
 
@@ -37,7 +51,9 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('EnsJobeetBundle:Job')->find($id);
+        //$entity = $em->getRepository('EnsJobeetBundle:Job')->find($id);
+
+        $entity = $em->getRepository('EnsJobeetBundle:Job')->getActiveJob($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
