@@ -50,6 +50,9 @@ security:
       form_login:
         login_path:  /login
         check_path:  /login_check
+      logout:
+        path:   /logout
+        target: /
  
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
@@ -59,6 +62,9 @@ security:
       memory:
         users:
           admin: { password: adminpass, roles: 'ROLE_ADMIN' }
+    main:
+      entity: { class: Ens\JobeetBundle\Entity\User, property: username }
  
   encoders:
     Symfony\Component\Security\Core\User\User: plaintext
+    Ens\JobeetBundle\Entity\User: sha512

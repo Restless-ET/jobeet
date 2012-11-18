@@ -3,6 +3,9 @@ login:
     defaults:  { _controller: "EnsJobeetBundle:Default:login" }
 login_check:
     pattern:   /login_check
+    
+logout:
+    pattern:   /logout
 
 EnsJobeetBundle_category:
     pattern: /category/{slug}/{page}
