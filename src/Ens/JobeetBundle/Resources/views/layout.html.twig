@@ -21,15 +21,15 @@
           <h1><a href="{{ path('EnsJobeetBundle_homepage') }}">
             <img src="{{ asset('bundles/ensjobeet/images/logo.jpg') }}" alt="Jobeet Job Board" />
           </a></h1>
- 
+
           <div id="sub_header">
             <div class="post">
               <h2>Ask for people</h2>
               <div>
-                <a href="{{ path('ens_job') }}">Post a Job</a>
+                <a href="{{ path('ens_job_new') }}">Post a Job</a>
               </div>
             </div>
- 
+
             <div class="search">
               <h2>Ask for a job</h2>
               <form action="" method="get">
@@ -43,26 +43,26 @@
           </div>
         </div>
       </div>
- 
+
       <div id="content">
         {% if app.session.hasFlash('notice') %}
           <div class="flash_notice">
             {{ app.session.flash('notice') }}
           </div>
         {% endif %}
- 
+
         {% if app.session.hasFlash('error') %}
           <div class="flash_error">
             {{ app.session.flash('error') }}
           </div>
         {% endif %}
- 
+
         <div class="content">
             {% block content %}
             {% endblock %}
         </div>
       </div>
- 
+
       <div id="footer">
         <div class="content">
           <span class="symfony">
