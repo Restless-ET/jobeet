@@ -95,6 +95,8 @@ class Job
      */
     private $category;
 
+    public $file;
+
 
     /**
      * Get id
@@ -520,5 +522,36 @@ class Job
             $now = $this->getCreatedAt() ? $this->getCreatedAt()->format('U') : time();
             $this->expires_at = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
         }
+    }
+
+    public static function getTypes()
+    {
+      return array('full-time' => 'Full time', 'part-time' => 'Part time', 'freelance' => 'Freelance');
+    }
+
+    public static function getTypeValues()
+    {
+      return array_keys(self::getTypes());
+    }
+
+    protected function getUploadDir()
+    {
+      return 'uploads/jobs';
+    }
+
+
+    protected function getUploadRootDir()
+    {
+      return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    public function getWebPath()
+    {
+      return null === $this->logo ? null : $this->getUploadDir().'/'.$this->logo;
+    }
+
+    public function getAbsolutePath()
+    {
+      return null === $this->logo ? null : $this->getUploadRootDir().'/'.$this->logo;
     }
 }
