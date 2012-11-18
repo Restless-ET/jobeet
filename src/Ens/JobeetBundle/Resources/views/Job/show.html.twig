@@ -8,7 +8,7 @@
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/job.css') }}" type="text/css" media="all" />
 {% endblock %}
- 
+
 {% block content %}
 <div id="job">
   <h1>{{ entity.company }}</h1>
@@ -26,21 +26,21 @@
       </a>
     </div>
   {% endif %}
- 
+
   <div class="description">
     {{ entity.description|nl2br }}
   </div>
 
   <h4>How to apply?</h4>
- 
+
   <p class="how_to_apply">{{ entity.howtoapply }}</p>
- 
+
   <div class="meta">
     <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>
   </div>
- 
+
   <div style="padding: 20px 0">
-    <a href="{{ path('ens_job_edit', { 'id': entity.id }) }}">
+    <a href="{{ path('ens_job_edit', { 'token': entity.token }) }}">
       Edit
     </a>
   </div>
